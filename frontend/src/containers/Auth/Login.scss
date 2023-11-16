@@ -62,7 +62,7 @@
             text-align: center;
             justify-content: center;
             margin-top: 10px;
-            gap: 15px;
+            gap: 25px;
 
             .google {
                 font-size: 30px;
@@ -74,6 +74,7 @@
                 display: flex;
                 justify-content: center;
                 color: white;
+                cursor: pointer;
             }
 
             .facebook {
@@ -86,6 +87,7 @@
                 display: flex;
                 justify-content: center;
                 color: white;
+                cursor: pointer;
             }
             
         }
