@@ -1,0 +1,30 @@
+.side-bar-container {
+    margin-top: 5px;
+
+    ul{
+        padding-left: 20px;
+
+        li {
+            list-style-type: none;
+            padding: 5px 0px;
+    
+            .font-awesome {
+                color: white;
+                font-size: 20px;
+                padding-right:5px ;
+            }
+    
+            .side-bar-link {
+                text-decoration: none;
+                color: #f1f1f1;
+                margin-left: 5px;
+                font-size: 18px;
+                font-family: Oswald;
+            }
+        }
+    
+        hr {
+            color: white;
+        }
+    }
+}

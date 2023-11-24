@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 
 import * as actions from "../../store/actions";
 import './Login.scss';
-import { handleLogin } from '../../services/userService';
+import { handleLoginService } from '../../services/userService';
 
 class Login extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class Login extends Component {
         })
 
         try {
-            let data = await handleLogin(this.state.username, this.state.password);
+            let data = await handleLoginService(this.state.username, this.state.password);
             if (data && data.errCode !== 0) {
                 this.setState({
                     errMessage: data.message

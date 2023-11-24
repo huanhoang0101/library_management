@@ -46,3 +46,45 @@
       color: red !important;
     }
   }
+
+  .model-user-container {
+    .modal-header {
+      height: 40px !important;
+
+      button {
+        background-color: transparent !important;
+        color: white;
+        border: none;
+        font-size: 30px;
+
+        :hover {
+          color: red;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 20px;
+      
+      label {
+        margin: 5px 0;
+      }
+      .form-row {
+        display: flex;
+        gap: 15px;
+
+        .input-container {
+          width: 50%;
+        }
+      }
+    }
+      /* .input-container {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          border-radius: 3px;
+          height: 30px;
+        }
+      } */
+  }

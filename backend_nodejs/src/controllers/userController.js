@@ -1,3 +1,4 @@
+import { json } from 'body-parser';
 import userService from '../services/userService';
 
 let handleLogin = async (req, res) => {
@@ -56,9 +57,35 @@ let handleCreateNewUser = async (req, res) => {
     return res.status(200).json(message);
 }
 
+let handleUpdateUser = async (req, res) => {
+    let data = req.body;
+    if (!data) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: "Missing required parameter"
+        })
+    }
+    let message = await userService.updateUser(data);
+    return res.status(200).json(message);
+}
+
+let handleDeleteUser = async (req, res) => {
+    let userId = req.body.id;
+    if (!userId) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: "Missing required parameter"
+        })
+    }
+    let message = await userService.deleteUser(userId);
+    return res.status(200).json(message);
+}
+
 module.exports = {
     handleLogin: handleLogin,
     handleGetAllUsers: handleGetAllUsers,
     handleGetUserById: handleGetUserById,
-    handleCreateNewUser: handleCreateNewUser
+    handleCreateNewUser: handleCreateNewUser,
+    handleUpdateUser: handleUpdateUser,
+    handleDeleteUser: handleDeleteUser
 }

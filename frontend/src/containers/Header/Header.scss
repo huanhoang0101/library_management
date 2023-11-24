@@ -8,16 +8,28 @@
     color: $common-text-color;
     height: 40px;
     position: relative;
-    .btn-logout {
+    .right-header-container {
         color: $common-text-color;
         line-height: 40px;
         height: 40px;
         padding: 0 10px;
-        &:hover {
-            background-color: darken($colormain, 5);
+        display: flex;
+
+        .welcome {
+            margin: 0 20px;
         }
-        i {
-            font-size: $base-size + 1px;
+
+        .btn-logout {
+            height: 40px;
+            color: $common-text-color;
+            padding: 6px 10px 0px 10px;
+
+            &:hover {
+                background-color: darken($colormain, 5);
+            }
+            i {
+                font-size: $base-size + 1px;
+            }
         }
     }
 }

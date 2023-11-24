@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
@@ -42,7 +42,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Router history={history}>
+                {/* <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
@@ -62,9 +62,18 @@ class App extends Component {
                             closeButton={<CustomToastCloseButton />}
                         />
                     </div>
-                </Router>
+                </Router> */}
+                <BrowserRouter>
+
+                    {/* <Route path="/" exact component={Home} />
+                    <Route path="/register" exact component={SignInForm} />
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/adminLogin" exact component={AdminLogin} /> */}
+                    <Route path="/dashboard" component={Dashboard} />
+
+                </BrowserRouter>
             </Fragment>
-        )
+        );
     }
 }
 
