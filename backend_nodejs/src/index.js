@@ -7,6 +7,8 @@ import cors from "cors";
 require('dotenv').config();
 
 let app = express();
+
+//var cors = require('cors');
 //app.use(cors({ origin: true }));
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
@@ -27,6 +29,8 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+//app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
