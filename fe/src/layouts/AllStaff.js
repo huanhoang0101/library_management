@@ -1,72 +1,72 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../scss/UserManage.scss';
-import { getAllUsersService, createNewUserService, deleteUserService, editUserService } from '../services/UserService';
-import ModalAddNewUser from '../modals/AddNewUserModal';
-import ModalEditUser from '../modals/EditUserModal';
+import '../scss/StaffManage.scss';
+import { getAllStaffService, createNewStaffService, deleteStaffService, editStaffService } from '../services/StaffService';
+import ModalAddNewStaff from '../modals/AddNewStaffModal';
+import ModalEditStaff from '../modals/EditStaffModal';
 import { FaTrash, FaPencilAlt, FaPlus } from "react-icons/fa";
 
-class UserManage extends Component {
+class StaffManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            arrUsers: [],
-            isOpenModalAddNewUser: false,
-            isOpenModalEditUser: false,
-            editUser: {},
+            arrStaff: [],
+            isOpenModalAddNewStaff: false,
+            isOpenModalEditStaff: false,
+            editStaff: {},
         }
 
 
     }
 
     async componentDidMount() {
-        await this.getAllUsers();
+        await this.getAllStaff();
     }
 
-    getAllUsers = async () => {
-        let response = await getAllUsersService();
+    getAllStaff = async () => {
+        let response = await getAllStaffService();
         if (response.data && response.data.errCode === 0) {
             this.setState({
-                arrUsers: response.data.users
+                arrStaff: response.data.staff
             })
         }
     }
 
-    handleAddNewUser = () => {
+    handleAddNewStaff = () => {
         this.setState({
-            isOpenModalAddNewUser: true
+            isOpenModalAddNewStaff: true
         })
     }
 
-    handleEditUser = (user) => {
+    handleEditStaff = (staff) => {
         this.setState({
-            isOpenModalEditUser: true,
-            editUser: user
+            isOpenModalEditStaff: true,
+            editStaff: staff
         })
     }
 
-    toggelAddNewUser = () => {
+    toggelAddNewStaff = () => {
         this.setState({
-            isOpenModalAddNewUser: !this.state.isOpenModalAddNewUser
+            isOpenModalAddNewStaff: !this.state.isOpenModalAddNewStaff
         })
     }
 
-    toggelEditUser = () => {
+    toggelEditStaff = () => {
         this.setState({
-            isOpenModalEditUser: !this.state.isOpenModalEditUser
+            isOpenModalEditStaff: !this.state.isOpenModalEditStaff
         })
     }
 
-    createNewUser = async (data) => {
+    createNewStaff = async (data) => {
         try {
-            let response = await createNewUserService(data);
+            let response = await createNewStaffService(data);
             if (response.data && response.data.errCode !== 0) {
                 alert(response.data.errMessage)
             } else {
-                await this.getAllUsers();
+                await this.getAllStaff();
                 this.setState({
-                    isOpenModalAddNewUser: false
+                    isOpenModalAddNewStaff: false
                 })
             }
 
@@ -75,15 +75,15 @@ class UserManage extends Component {
         }
     }
 
-    editUser = async (data) => {
+    editStaff = async (data) => {
         try {
-            let response = await editUserService(data);
+            let response = await editStaffService(data);
             if (response.data && response.data.errCode !== 0) {
                 alert(response.data.errMessage)
             } else {
-                await this.getAllUsers();
+                await this.getAllStaff();
                 this.setState({
-                    isOpenModalEditUser: false
+                    isOpenModalEditStaff: false
                 })
             }
         } catch (e) {
@@ -91,11 +91,11 @@ class UserManage extends Component {
         }
     }
 
-    handleDeleteUser = async (userId) => {
+    handleDeleteStaff = async (staffId) => {
         try {
-            let response = await deleteUserService(userId);
+            let response = await deleteStaffService(staffId);
             if (response.data && response.data.errCode === 0) {
-                await this.getAllUsers();
+                await this.getAllStaff();
             } else {
                 alert(response.data.errMessage)
             }
@@ -105,31 +105,31 @@ class UserManage extends Component {
     }
 
     render() {
-        let arrUsers = this.state.arrUsers;
+        let arrStaff = this.state.arrStaff;
         return (
-            <div className='user-container'>
-                <ModalAddNewUser
-                    isOpen={this.state.isOpenModalAddNewUser}
-                    toggelAddNewUser={this.toggelAddNewUser}
-                    createNewUser={this.createNewUser}
+            <div className='staff-container'>
+                <ModalAddNewStaff
+                    isOpen={this.state.isOpenModalAddNewStaff}
+                    toggelAddNewStaff={this.toggelAddNewStaff}
+                    createNewStaff={this.createNewStaff}
                 />
                 {
-                    this.state.isOpenModalEditUser &&
-                    <ModalEditUser
-                        isOpen={this.state.isOpenModalEditUser}
-                        toggelEditUser={this.toggelEditUser}
-                        editUser={this.editUser}
-                        currentUser={this.state.editUser}
+                    this.state.isOpenModalEditStaff &&
+                    <ModalEditStaff
+                        isOpen={this.state.isOpenModalEditStaff}
+                        toggelEditStaff={this.toggelEditStaff}
+                        editStaff={this.editStaff}
+                        currentStaff={this.state.editStaff}
                     />
                 }
 
-                <div className="text-center fs-1 fw-bold title">Manage users</div>
+                <div className="text-center fs-1 fw-bold title">Manage staff</div>
                 <div className='mx-1'>
-                    <button className='btn btn-primary mx-5 px-3 btn-add-new-user'
-                        onClick={() => this.handleAddNewUser()}
-                    ><FaPlus className='font-awesome-plus' /> Add new user</button>
+                    <button className='btn btn-primary mx-5 px-3 btn-add-new-staff'
+                        onClick={() => this.handleAddNewStaff()}
+                    ><FaPlus className='font-awesome-plus' /> Add new staff</button>
                 </div>
-                <div className='users-table mt-3 mx-5'>
+                <div className='staff-table mt-3 mx-5'>
                     <table id="customers">
                         <tr>
                             <th>Email</th>
@@ -138,7 +138,7 @@ class UserManage extends Component {
                             <th>Phone</th>
                             <th>Actions</th>
                         </tr>
-                        {arrUsers && arrUsers.filter(users => users.role_id == 1).map((item, index) => {
+                        {arrStaff && arrStaff.filter(staff => staff.role_id == 2).map((item, index) => {
                             return (
                                 <tr>
                                     <td>{item.email}</td>
@@ -147,11 +147,11 @@ class UserManage extends Component {
                                     <td>{item.phone}</td>
                                     <td>
                                         <button className='btn-edit'
-                                            onClick={() => this.handleEditUser(item)}>
+                                            onClick={() => this.handleEditStaff(item)}>
                                             <FaPencilAlt />
                                         </button>
                                         <button className='btn-delete'
-                                            onClick={() => this.handleDeleteUser(item.id)}>
+                                            onClick={() => this.handleDeleteStaff(item.id)}>
                                             <FaTrash />
                                         </button>
                                     </td>
@@ -176,5 +176,5 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-//export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
-export default UserManage;
+//export default connect(mapStateToProps, mapDispatchToProps)(StaffManage);
+export default StaffManage;

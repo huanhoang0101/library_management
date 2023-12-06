@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         copies_owner: DataTypes.INTEGER,
         image: DataTypes.STRING,
         description: DataTypes.TEXT,
-        author_id: DataTypes.INTEGER,
+        author: DataTypes.STRING,
         category_id: DataTypes.INTEGER,
     }, {
         sequelize,

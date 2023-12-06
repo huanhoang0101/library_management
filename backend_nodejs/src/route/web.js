@@ -1,6 +1,8 @@
 import express from "express";
 import homeController from "../controllers/homeController";
-import userController from "../controllers/userController"
+import userController from "../controllers/userController";
+import bookController from "../controllers/bookController";
+import staffController from "../controllers/staffController";
 
 let router = express.Router();
 
@@ -16,13 +18,27 @@ let initWebRoutes = (app) => {
     router.post('/put-crud', homeController.putCRUD);
     router.get('/delete-crud', homeController.deleteCRUD);
 
-    //API
+    //API-USER
     router.post('/api/login', userController.handleLogin);
     router.get('/api/get-all-users', userController.handleGetAllUsers);
     router.get('/api/get-user', userController.handleGetUserById);
     router.post('/api/create-new-user', userController.handleCreateNewUser);
     router.put('/api/update-user', userController.handleUpdateUser);
     router.delete('/api/delete-user', userController.handleDeleteUser);
+
+    //API-BOOK
+    router.get('/api/get-all-books', bookController.handleGetAllBooks);
+    router.post('/api/create-new-book', bookController.handleCreateNewBook);
+    router.put('/api/update-book', bookController.handleUpdateBook);
+    router.delete('/api/delete-book', bookController.handleDeleteBook);
+
+    //API-STAFF
+    router.post('/api/login', staffController.handleLogin);
+    router.get('/api/get-all-staff', staffController.handleGetAllStaff);
+    router.get('/api/get-staff', staffController.handleGetStaffById);
+    router.post('/api/create-new-staff', staffController.handleCreateNewStaff);
+    router.put('/api/update-staff', staffController.handleUpdateStaff);
+    router.delete('/api/delete-staff', staffController.handleDeleteStaff);
 
     return app.use("/", router);
 }

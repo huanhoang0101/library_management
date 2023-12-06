@@ -3,72 +3,72 @@ import bcrypt from 'bcryptjs';
 
 var salt = bcrypt.genSaltSync(10);
 
-let handleUserLogin = (email, password) => {
+let handleStaffLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let userData = {};
+            let staffData = {};
             //check email exist
             let isExist = await checkEmail(email);
             if (isExist) {
-                let user = await findUserByEmail(email);
+                let staff = await findStaffByEmail(email);
                 //check password
-                let check = await bcrypt.compareSync(password, user.password);
+                let check = await bcrypt.compareSync(password, staff.password);
                 if (check) {
-                    userData.errCode = 0;
-                    userData.errMessage = 'OK';
+                    staffData.errCode = 0;
+                    staffData.errMessage = 'OK';
 
-                    delete user.password;
-                    userData.user = user;
+                    delete staff.password;
+                    staffData.staff = staff;
                 } else {
-                    userData.errCode = 3;
-                    userData.errMessage = 'Wrong password';
+                    staffData.errCode = 3;
+                    staffData.errMessage = 'Wrong password';
                 }
             } else {
-                userData.errCode = 1;
-                userData.errMessage = "Your email isn't exist!"
+                staffData.errCode = 1;
+                staffData.errMessage = "Your email isn't exist!"
             }
 
-            resolve(userData);
+            resolve(staffData);
         } catch (e) {
             reject(e);
         }
     })
 }
 
-let getAllUsers = () => {
+let getAllStaff = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let users = await db.User.findAll({
+            let staff = await db.User.findAll({
                 attributes: {
                     exclude: ['password']
                 }
             });
 
-            resolve(users);
+            resolve(staff);
         } catch (e) {
             reject(e);
         }
     })
 }
 
-let getUserById = (userId) => {
+let getStaffById = (staffId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findOne({
-                where: { id: userId },
+            let staff = await db.User.findOne({
+                where: { id: staffId },
                 attributes: {
                     exclude: ['password']
                 }
             })
 
-            resolve(user);
+            resolve(staff);
         } catch (e) {
             reject(e);
         }
     })
 }
 
-let createNewUser = (data) => {
+let createNewStaff = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let check = await checkEmail(data.email);
@@ -85,7 +85,7 @@ let createNewUser = (data) => {
                     phone: data.phone,
                     email: data.email,
                     password: hashPassWord,
-                    role_id: 1
+                    role_id: 2
                 })
 
                 resolve({
@@ -99,7 +99,7 @@ let createNewUser = (data) => {
     })
 }
 
-let updateUser = (data) => {
+let updateStaff = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.id) {
@@ -108,26 +108,26 @@ let updateUser = (data) => {
                     errMessage: 'Missing required parameter'
                 })
             }
-            let user = await db.User.findOne({
+            let staff = await db.User.findOne({
                 where: { id: data.id },
                 raw: false
             });
 
-            if (user) {
-                user.firstName = data.firstName;
-                user.lastName = data.lastName;
-                user.phone = data.phone;
+            if (staff) {
+                staff.firstName = data.firstName;
+                staff.lastName = data.lastName;
+                staff.phone = data.phone;
 
-                await user.save();
+                await staff.save();
 
                 resolve({
                     errCode: 0,
-                    message: 'Update user success'
+                    message: 'Update staff success'
                 });
             } else {
                 resolve({
                     errCode: 2,
-                    errMessage: "User not found"
+                    errMessage: "Staff not found"
                 });
             }
 
@@ -137,30 +137,27 @@ let updateUser = (data) => {
     })
 }
 
-let deleteUser = (userId) => {
+let deleteStaff = (staffId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await findUserById(userId)
+            let staff = await findStaffById(staffId)
 
-            if (user) {
-                //await user.destroy();
+            if (staff) {
+                //await staff.destroy();
                 await db.User.destroy({
-                    where: { id: userId }
+                    where: { id: staffId }
                 })
 
                 resolve({
                     errCode: 0,
-                    errMessage: 'User is deleted'
+                    errMessage: 'Staff is deleted'
                 })
             } else {
                 resolve({
                     errCode: 2,
-                    errMessage: "User isn't exist"
+                    errMessage: "Staff isn't exist"
                 });
             }
-
-            /* let userList = await getAllUsers();
-            resolve(userList); */
         } catch (e) {
             reject(e);
         }
@@ -169,44 +166,40 @@ let deleteUser = (userId) => {
 
 
 
-let findUserById = (userId) => {
+let findStaffById = (staffId) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findOne({
-                where: { id: userId },
-                //attributes: ['email', 'role_id', 'password'],
-                //raw: true
+            let staff = await db.User.findOne({
+                where: { id: staffId },
             })
 
-            resolve(user)
+            resolve(staff)
         } catch (e) {
             reject(e);
         }
     })
 }
 
-let findUserByEmail = (userEmail) => {
+let findStaffByEmail = (staffEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await db.User.findOne({
-                where: { email: userEmail },
-                //attributes: ['email', 'role_id', 'password'],
-                //raw: true
+            let staff = await db.User.findOne({
+                where: { email: staffEmail },
             })
 
-            resolve(user)
+            resolve(staff)
         } catch (e) {
             reject(e);
         }
     })
 }
 
-let checkEmail = (userEmail) => {
+let checkEmail = (staffEmail) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let user = await findUserByEmail(userEmail);
+            let staff = await findStaffByEmail(staffEmail);
 
-            if (user) {
+            if (staff) {
                 resolve(true);
             } else {
                 resolve(false)
@@ -229,10 +222,10 @@ let hashPassword = (password) => {
 }
 
 module.exports = {
-    handleUserLogin: handleUserLogin,
-    getAllUsers: getAllUsers,
-    getUserById: getUserById,
-    createNewUser: createNewUser,
-    updateUser: updateUser,
-    deleteUser: deleteUser
+    handleStaffLogin: handleStaffLogin,
+    getAllStaff: getAllStaff,
+    getStaffById: getStaffById,
+    createNewStaff: createNewStaff,
+    updateStaff: updateStaff,
+    deleteStaff: deleteStaff
 }

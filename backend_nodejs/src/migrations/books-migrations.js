@@ -23,8 +23,8 @@ module.exports = {
             description: {
                 type: Sequelize.TEXT
             },
-            author_id: {
-                type: Sequelize.INTEGER
+            author: {
+                type: Sequelize.STRING
             },
             category_id: {
                 type: Sequelize.INTEGER

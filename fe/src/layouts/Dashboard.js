@@ -6,7 +6,7 @@ import AllUser from "./AllUser";
 import AllBook from "./AllBook";
 import AllUserLoanBook from "./AllUserLoanBook";
 import AddLoan from "./AddLoan";
-import AddStaff from "./AddStaff";
+import AllStaff from "./AllStaff";
 
 const Dashboard = () => {
     return (
@@ -28,7 +28,7 @@ const Dashboard = () => {
                         <Route path="/dashboard/allLoan" exact component={AllUserLoanBook} />
                         <Route path="/dashboard/user" exact component={AllUser} />
                         <Route path="/dashboard/book" exact component={AllBook} />
-                        <Route path="/dashboard/staff" exact component={AddStaff} />
+                        <Route path="/dashboard/staff" exact component={AllStaff} />
                     </Switch>
 
                 </div>
