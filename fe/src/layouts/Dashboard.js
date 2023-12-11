@@ -5,8 +5,10 @@ import { Switch, Route } from "react-router-dom";
 import AllUser from "./AllUser";
 import AllBook from "./AllBook";
 import AllUserLoanBook from "./AllUserLoanBook";
-import AddLoan from "./AddLoan";
+import AddCallCard from "../components/CallCard/AddCallCard";
 import AllStaff from "./AllStaff";
+import SearchUser from '../components/CallCard/SearchUser';
+import SearchBook from '../components/CallCard/SearchBook';
 
 const Dashboard = () => {
     return (
@@ -24,11 +26,13 @@ const Dashboard = () => {
                     <Switch>
 
                         <Route path="/dashboard" exact element={Dashboard} />
-                        <Route path="/dashboard/loan" exact component={AddLoan} />
+                        <Route path="/dashboard/loan" exact component={SearchUser} />
                         <Route path="/dashboard/allLoan" exact component={AllUserLoanBook} />
                         <Route path="/dashboard/user" exact component={AllUser} />
                         <Route path="/dashboard/book" exact component={AllBook} />
                         <Route path="/dashboard/staff" exact component={AllStaff} />
+                        <Route path="/dashboard/loan/:id" exact component={SearchBook} />
+                        <Route path="/dashboard/loan/:id/add-loan/" exact component={AddCallCard} />
                     </Switch>
 
                 </div>

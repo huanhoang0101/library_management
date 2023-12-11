@@ -41,7 +41,8 @@ let getAllUsers = () => {
             let users = await db.User.findAll({
                 attributes: {
                     exclude: ['password']
-                }
+                },
+                where: { role_id: 1 }
             });
 
             resolve(users);
