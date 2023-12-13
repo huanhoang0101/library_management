@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { FaCircle, FaEnvelope, FaPhone, FaPrint } from "react-icons/fa";
 //import '../scss/UserManage.scss';
-//import { getAllBooksService, createNewBookService, deleteBookService, editBookService } from '../services/BookService';
+import { createNewLoanService } from '../../services/LoanService';
+import { getUserByIdService } from '../../services/UserService';
+import { getBookByIdService } from '../../services/BookService';
 
-class BookManage extends Component {
+class AddCallCard extends Component {
 
     constructor(props) {
         super(props);
@@ -11,95 +13,123 @@ class BookManage extends Component {
             user_id: '',
             book_id: '',
             loan_day: '',
-            due_day: ''
+            loan_day_display: '',
+            due_day: '',
+            due_day_display: '',
+            userName: '',
+            userEmail: '',
+            bookName: ''
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let today = new Date();
 
-    }
+        let dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + parseInt(process.env.REACT_APP_DUE));
 
-    handleOnChangeInput = (event, type) => {
-        let copyState = { ...this.state };
-        copyState[type] = event.target.value;
+        let userId = this.props.match.params.id;
+
+        let bookId = this.props.location.state.bookId;
+
         this.setState({
-            ...copyState
-        });
+            loan_day: today,
+            due_day: dueDate,
+            loan_day_display: today.toLocaleDateString('en-GB'),
+            due_day_display: dueDate.toLocaleDateString('en-GB'),
+            user_id: userId,
+            book_id: bookId
+        })
+
+        await this.getUserById();
+        await this.getBookById();
     }
 
-    handleAddNewUser = () => {
-        let isValid = this.checkValidateInput();
-        if (isValid) {
-            //call API
-            this.props.createNewUser(this.state);
+    getUserById = async () => {
+        let response = await getUserByIdService(this.props.match.params.id);
+        if (response.data && response.data.errCode === 0) {
             this.setState({
-                user_id: '',
-                book_id: '',
-                loan_day: '',
-                due_day: ''
+                userName: response.data.user.lastName + " " + response.data.user.firstName,
+                userEmail: response.data.user.email
             })
         }
     }
 
-    checkValidateInput = () => {
-        let isValid = true;
-        let arrInput = ['email', 'password', 'firstName', 'lastName', 'phone'];
-        for (let i = 0; i < arrInput.length; i++) {
-            if (!this.state[arrInput[i]]) {
-                isValid = false;
-                alert('Missing required parameter: ' + arrInput[i]);
-                break;
-            }
+    getBookById = async () => {
+        let response = await getBookByIdService(this.props.location.state.bookId);
+        console.log(response)
+        if (response.data && response.data.errCode === 0) {
+            this.setState({
+                bookName: response.data.book.title
+            })
         }
+    }
 
-        return isValid;
+    handleAddNewLoan = async () => {
+        //call API
+        await createNewLoanService(this.state);
     }
 
     render() {
-        let arrBooks = this.state.arrBooks;
         return (
             <>
-                <div class="form-row">
-                    <div class="input-container">
-                        <label for="inputEmail4">user_id</label>
-                        <input type="email"
-                            class="form-control"
-                            name="email"
-                            placeholder="Email"
-                            value={this.state.email}
-                            onChange={(event) => { this.handleOnChangeInput(event, "email") }}
-                        />
-                    </div>
-                    <div class="input-container">
-                        <label for="inputPassword4">book_id</label>
-                        <input type="password"
-                            class="form-control"
-                            name="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={(event) => { this.handleOnChangeInput(event, "password") }}
-                        />
+                <div class="title">
+                    <div class="text-center">In Phiếu mượn sách</div>
+
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container mb-5 mt-3">
+                            <div class="container">
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        <i class="far fa-building fa-4x ms-0"></i>
+                                        <p class="pt-2">Thư viện Trường Đại học Mở Thành phố Hồ Chí Minh</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-center">Phiếu mượn sách</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <ul class="list-unstyled">
+                                            <li class="text-muted">Tên: <span>{this.state.userName}</span></li>
+                                            <li class="text-muted">Email: <span>{this.state.userEmail}</span></li>
+                                            <li class="text-muted">Tên sách: <span>{this.state.bookName}</span></li>
+
+                                        </ul>
+                                    </div>
+                                    <div class="col-xl-4">
+
+                                        <ul class="list-unstyled">
+                                            <li class="text-muted"><FaCircle /> <span
+                                                class="fw-bold">Creation Date: </span>{this.state.loan_day_display}</li>
+                                            <li class="text-muted"><FaCircle /> <span
+                                                class="fw-bold">Due Date: </span>{this.state.due_day_display}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <hr />
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <p class="ms-3">Thông tin liên hệ</p>
+                                    </div>
+                                    <div>
+                                        <li class="text-muted"><FaEnvelope /><span
+                                            class="fw-bold">thuviendhmo@.ou.edu.vn</span></li>
+                                        <li class="text-muted"><FaPhone /><span
+                                            class="fw-bold">0785553654</span></li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputFirstName">loan_day</label>
-                    <input type="text"
-                        class="form-control"
-                        name="firstName"
-                        placeholder="First Name"
-                        value={this.state.firstName}
-                        onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="inputLastName">due_day</label>
-                    <input type="text"
-                        class="form-control"
-                        name="lastName"
-                        placeholder="Last Name"
-                        value={this.state.lastName}
-                        onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
-                    />
+                <div>
+                    <button class="btn btn-success float-end" id="invoice-print"
+                        onClick={() => this.handleAddNewLoan()}
+                    ><FaPrint /> In phiếu</button>
                 </div>
             </>
         );
@@ -107,15 +137,4 @@ class BookManage extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
-export default BookManage;
+export default AddCallCard;

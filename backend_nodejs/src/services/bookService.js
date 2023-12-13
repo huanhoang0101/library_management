@@ -141,9 +141,24 @@ let getBookByTitle = (bookTitle) => {
     })
 }
 
+let getBookById = (bookId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let book = await db.Books.findOne({
+                where: { id: bookId }
+            })
+
+            resolve(book);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     getAllBooks: getAllBooks,
     createNewBook: createNewBook,
     updateBook: updateBook,
     deleteBook: deleteBook,
+    getBookById: getBookById
 }

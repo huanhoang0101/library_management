@@ -40,9 +40,29 @@ let handleDeleteBook = async (req, res) => {
     return res.status(200).json(message);
 }
 
+let handleGetBookById = async (req, res) => {
+    let bookId = req.body.id;
+    if (!bookId) {
+        return res.status(200).json({
+            errCode: 1,
+            message: 'Missing required parameter',
+            book: []
+        })
+    }
+
+    let book = await bookService.getBookById(bookId);
+
+    return res.status(200).json({
+        errCode: 0,
+        message: 'OK',
+        book
+    })
+}
+
 module.exports = {
     handleGetAllBooks: handleGetAllBooks,
     handleCreateNewBook: handleCreateNewBook,
     handleUpdateBook: handleUpdateBook,
-    handleDeleteBook: handleDeleteBook
+    handleDeleteBook: handleDeleteBook,
+    handleGetBookById: handleGetBookById
 }

@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const endpoint = "http://localhost:8080";
+const endpoint = process.env.REACT_APP_BACKEND_URL;
 
 const handleLoginService = (userEmail, userPassword) => {
-    return axios.post('http://localhost:8080/api/login', { email: userEmail, password: userPassword });
+    return axios.post(`${endpoint}/api/login`, { email: userEmail, password: userPassword });
 }
 
 const getAllUsersService = (userId) => {
@@ -11,11 +11,11 @@ const getAllUsersService = (userId) => {
 }
 
 const createNewUserService = (data) => {
-    return axios.post(`http://localhost:8080/api/create-new-user`, data)
+    return axios.post(`${endpoint}/api/create-new-user`, data)
 }
 
 const deleteUserService = (userId) => {
-    return axios.delete('http://localhost:8080/api/delete-user', {
+    return axios.delete(`${endpoint}/api/delete-user`, {
         data: {
             id: userId
         }
@@ -23,7 +23,11 @@ const deleteUserService = (userId) => {
 }
 
 const editUserService = (data) => {
-    return axios.put('http://localhost:8080/api/update-user', data)
+    return axios.put(`${endpoint}/api/update-user`, data)
+}
+
+const getUserByIdService = (userId) => {
+    return axios.get(`${endpoint}/api/get-user-by-id?id=${userId}`)
 }
 
 export {
@@ -32,4 +36,5 @@ export {
     createNewUserService,
     editUserService,
     deleteUserService,
+    getUserByIdService,
 }

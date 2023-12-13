@@ -76,8 +76,9 @@ class UserManage extends Component {
     }
 
     editUser = async (data) => {
+        console.log(data);
         try {
-            let response = await editUserService(data);
+            let response = await editUserService(data); console.log("=====", response)
             if (response.data && response.data.errCode !== 0) {
                 alert(response.data.errMessage)
             } else {
