@@ -68,7 +68,7 @@ class ModalStaff extends Component {
                 size='lg'
                 centered
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Add new staff</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Thêm nhân viên mới</ModalHeader>
                 <ModalBody>
                     <div class="form-row">
                         <div class="input-container">
@@ -82,43 +82,43 @@ class ModalStaff extends Component {
                             />
                         </div>
                         <div class="input-container">
-                            <label for="inputPassword4">Password</label>
+                            <label for="inputPassword4">Mật khẩu</label>
                             <input type="password"
                                 class="form-control"
                                 name="password"
-                                placeholder="Password"
+                                placeholder="Mật khẩu"
                                 value={this.state.password}
                                 onChange={(event) => { this.handleOnChangeInput(event, "password") }}
                             />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputFirstName">First Name</label>
+                        <label for="inputFirstName">Tên</label>
                         <input type="text"
                             class="form-control"
                             name="firstName"
-                            placeholder="First Name"
+                            placeholder="Tên"
                             value={this.state.firstName}
                             onChange={(event) => { this.handleOnChangeInput(event, "firstName") }}
                         />
                     </div>
                     <div class="form-group">
-                        <label for="inputLastName">Last Name</label>
+                        <label for="inputLastName">Họ</label>
                         <input type="text"
                             class="form-control"
                             name="lastName"
-                            placeholder="Last Name"
+                            placeholder="Họ"
                             value={this.state.lastName}
                             onChange={(event) => { this.handleOnChangeInput(event, "lastName") }}
                         />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputPhone">Phone</label>
+                            <label for="inputPhone">Số điện thoại</label>
                             <input type="number"
                                 class="form-control"
                                 name="phone"
-                                placeholder="Phone"
+                                placeholder="Số điện thoại"
                                 value={this.state.phone}
                                 onChange={(event) => { this.handleOnChangeInput(event, "phone") }}
                             />
@@ -129,12 +129,12 @@ class ModalStaff extends Component {
                     <Button className="px-3"
                         color="primary"
                         onClick={() => { this.handleAddNewStaff() }}>
-                        Add
+                        Thêm
                     </Button>{' '}
                     <Button className="px-3"
                         color="secondary"
                         onClick={() => { this.toggle() }}>
-                        Cancel
+                        Hủy
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -143,15 +143,4 @@ class ModalStaff extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ModalStaff);
 export default ModalStaff;

@@ -9,12 +9,13 @@ import AddCallCard from "../components/CallCard/AddCallCard";
 import AllStaff from "./AllStaff";
 import SearchUser from '../components/CallCard/SearchUser';
 import SearchBook from '../components/CallCard/SearchBook';
+import HomePage from '../components/HomePage/HomePage';
 
 const Dashboard = () => {
     return (
         <div>
-            <div style={{ marginBottom: "64px" }}>
-                {/* <Navbar /> */}
+            <div style={{ marginBottom: "80px" }}>
+                <Navbar />
             </div>
 
             <div style={{ display: "flex" }}>
@@ -25,7 +26,7 @@ const Dashboard = () => {
 
                     <Switch>
 
-                        <Route path="/dashboard" exact element={Dashboard} />
+                        <Route path="/dashboard" exact component={HomePage} />
                         <Route path="/dashboard/loan" exact component={SearchUser} />
                         <Route path="/dashboard/allLoan" exact component={AllUserLoanBook} />
                         <Route path="/dashboard/user" exact component={AllUser} />

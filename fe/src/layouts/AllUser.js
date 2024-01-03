@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import '../scss/UserManage.scss';
 import { getAllUsersService, createNewUserService, deleteUserService, editUserService } from '../services/UserService';
 import ModalAddNewUser from '../modals/AddNewUserModal';
@@ -124,27 +123,27 @@ class UserManage extends Component {
                     />
                 }
 
-                <div className="text-center fs-1 fw-bold title">Manage users</div>
+                <div className="text-center fs-1 fw-bold title">Quản lý học sinh</div>
                 <div className='mx-1'>
                     <button className='btn btn-primary mx-5 px-3 btn-add-new-user'
                         onClick={() => this.handleAddNewUser()}
-                    ><FaPlus className='font-awesome-plus' /> Add new user</button>
+                    ><FaPlus className='font-awesome-plus' /> Thêm học sinh mới</button>
                 </div>
                 <div className='users-table mt-3 mx-5'>
                     <table id="customers">
                         <tr>
                             <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                            <th>Actions</th>
+                            <th>Họ</th>
+                            <th>Tên</th>
+                            <th>Sđt</th>
+                            <th>Hành động</th>
                         </tr>
                         {arrUsers && arrUsers.filter(users => users.role_id == 1).map((item, index) => {
                             return (
                                 <tr>
                                     <td>{item.email}</td>
-                                    <td>{item.firstName}</td>
                                     <td>{item.lastName}</td>
+                                    <td>{item.firstName}</td>
                                     <td>{item.phone}</td>
                                     <td>
                                         <button className='btn-edit'
@@ -167,15 +166,4 @@ class UserManage extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
 export default UserManage;

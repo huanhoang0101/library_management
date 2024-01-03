@@ -40,11 +40,11 @@ class SearchBook extends Component {
                     <table id="customers">
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Image</th>
-                            <th>Copies owner</th>
-                            <th>Action</th>
+                            <th>Tiêu đề</th>
+                            <th>Tác giả</th>
+                            <th>Ảnh bìa</th>
+                            <th>Số bản</th>
+                            <th>Hành động</th>
                         </tr>
                         {arrBooks && arrBooks.filter((item) => {
                             return this.state.keyword.toLowerCase() === ''

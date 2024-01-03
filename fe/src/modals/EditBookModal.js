@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import axios from 'axios';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import _ from 'lodash'
 
@@ -69,6 +69,20 @@ class ModalEditBook extends Component {
         return isValid;
     }
 
+    handleUploadImage = async (event) => {
+        const preset_key = process.env.REACT_APP_UPLOAD_ASSETS_NAME;
+        const cloud_name = process.env.REACT_APP_CLOUD_NAME;
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append("upload_preset", preset_key);
+        await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, formData)
+            .then(res => this.setState({ image: res.data.secure_url }))
+            .catch(err => console.log(err));
+
+        //let response = await apiUploadImage(formData);
+    }
+
 
     render() {
         return (
@@ -79,71 +93,68 @@ class ModalEditBook extends Component {
                 size='lg'
                 centered
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Edit book</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Chỉnh sửa sách</ModalHeader>
                 <ModalBody>
                     <div class="form-row">
                         <div class="input-container">
-                            <label for="inputTitle">Title</label>
+                            <label for="inputTitle">Tiêu đề</label>
                             <input type="text"
                                 class="form-control"
                                 name="title"
-                                placeholder="Title"
+                                placeholder="Tiêu đề"
                                 value={this.state.title}
                                 onChange={(event) => { this.handleOnChangeInput(event, "title") }}
                             />
                         </div>
                         <div class="input-container">
-                            <label for="inputauthor4">author</label>
+                            <label for="inputauthor4">Tác giả</label>
                             <input type="author"
                                 class="form-control"
                                 name="author"
-                                placeholder="author"
+                                placeholder="Tác giả"
                                 value={this.state.author}
                                 onChange={(event) => { this.handleOnChangeInput(event, "author") }}
                             />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputpublication_date">publication_date</label>
-                        <input type="text"
+                        <label for="inputpublication_date">Ngày xuất bản</label>
+                        <input type="date"
                             class="form-control"
                             name="publication_date"
-                            placeholder="publication_date"
+                            placeholder="Ngày xuất bản"
                             value={this.state.publication_date}
                             onChange={(event) => { this.handleOnChangeInput(event, "publication_date") }}
                         />
                     </div>
                     <div class="form-group">
-                        <label for="inputcopies_owner">copies_owner</label>
+                        <label for="inputcopies_owner">Số bản</label>
                         <input type="text"
                             class="form-control"
                             name="copies_owner"
-                            placeholder="copies_owner"
+                            placeholder="Số bản"
                             value={this.state.copies_owner}
                             onChange={(event) => { this.handleOnChangeInput(event, "copies_owner") }}
                         />
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputImage">Image</label>
-                            <input type="number"
+                            <label for="inputImage">Ảnh bìa</label>
+                            <input type="file"
                                 class="form-control"
                                 name="image"
-                                placeholder="Image"
-                                value={this.state.image}
-                                onChange={(event) => { this.handleOnChangeInput(event, "image") }}
+                                onChange={(event) => { this.handleUploadImage(event) }}
                             />
                         </div>
-                    </div><div class="form-row">
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputCategory">category_id</label>
-                            <input type="number"
-                                class="form-control"
-                                name="category"
-                                placeholder="Category"
-                                value={this.state.category_id}
-                                onChange={(event) => { this.handleOnChangeInput(event, "category_id") }}
-                            />
+                            <label for="inputCategory">Thể loại</label>
+                            <select id="inputState" class="form-control"
+                                onChange={(event) => { this.handleOnChangeInput(event, "category_id") }}>
+                                <option value="1" selected>Choose...</option>
+                                <option value="2">...</option>
+                            </select>
                         </div>
                     </div>
                 </ModalBody>
@@ -151,12 +162,12 @@ class ModalEditBook extends Component {
                     <Button className="px-3"
                         color="primary"
                         onClick={() => { this.handleEditBook() }}>
-                        Edit
+                        Sửa
                     </Button>{' '}
                     <Button className="px-3"
                         color="secondary"
                         onClick={() => { this.toggle() }}>
-                        Cancel
+                        Hủy
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -165,15 +176,4 @@ class ModalEditBook extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ModalEditBook);
 export default ModalEditBook;

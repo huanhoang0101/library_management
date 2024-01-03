@@ -25,11 +25,11 @@ const Sidebar = () => {
                     <Link to="/dashboard/loan" className="side-bar-link">Tạo phiếu mượn</Link>
                 </li>
                 <hr />
-                <li>
+                {/* <li>
                     <FaClipboardList className='font-awesome' />
                     <Link to="/dashboard/allLoan" className="side-bar-link">Danh sách phiếu mượn</Link>
                 </li>
-                <hr />
+                <hr /> */}
                 <li>
                     <FaUserPlus className='font-awesome' />
                     <Link to="/dashboard/user" className="side-bar-link">Quản lý người mượn</Link>

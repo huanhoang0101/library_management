@@ -11,6 +11,7 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 //import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
+  //document.body.style.backgroundColor = '#EAE7DC';
   return (
     <div>
       <BrowserRouter>

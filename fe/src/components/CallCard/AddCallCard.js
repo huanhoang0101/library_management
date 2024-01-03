@@ -103,9 +103,9 @@ class AddCallCard extends Component {
 
                                         <ul class="list-unstyled">
                                             <li class="text-muted"><FaCircle /> <span
-                                                class="fw-bold">Creation Date: </span>{this.state.loan_day_display}</li>
+                                                class="fw-bold">Ngày mượn: </span>{this.state.loan_day_display}</li>
                                             <li class="text-muted"><FaCircle /> <span
-                                                class="fw-bold">Due Date: </span>{this.state.due_day_display}</li>
+                                                class="fw-bold">Hạn trả: </span>{this.state.due_day_display}</li>
                                         </ul>
                                     </div>
                                 </div>

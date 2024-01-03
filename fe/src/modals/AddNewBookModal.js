@@ -99,25 +99,25 @@ class ModalAddBook extends Component {
                 size='lg'
                 centered
             >
-                <ModalHeader toggle={() => { this.toggle() }}>Add new book</ModalHeader>
+                <ModalHeader toggle={() => { this.toggle() }}>Thêm sách mới</ModalHeader>
                 <ModalBody>
                     <div class="form-row">
                         <div class="input-container">
-                            <label for="inputTitle">Title</label>
+                            <label for="inputTitle">Tiêu đề</label>
                             <input type="text"
                                 class="form-control"
                                 name="title"
-                                placeholder="Title"
+                                placeholder="Tiêu đề"
                                 value={this.state.title}
                                 onChange={(event) => { this.handleOnChangeInput(event, "title") }}
                             />
                         </div>
                         <div class="input-container">
-                            <label for="inputauthor4">Author</label>
+                            <label for="inputauthor4">Tác giả</label>
                             <input type="text"
                                 class="form-control"
                                 name="author"
-                                placeholder="Author"
+                                placeholder="Tác giả"
                                 value={this.state.author}
                                 onChange={(event) => { this.handleOnChangeInput(event, "author") }}
                             />
@@ -125,20 +125,20 @@ class ModalAddBook extends Component {
                     </div>
                     <div class="form-row">
                         <div class="input-container">
-                            <label for="inputpublication_date">Publication date</label>
+                            <label for="inputpublication_date">Ngày xuất bản</label>
                             <input type="date"
                                 class="form-control"
-                                name="publication_date"
+                                name="Ngày xuất bản"
                                 value={this.state.publication_date}
                                 onChange={(event) => { this.handleOnChangeInput(event, "publication_date") }}
                             />
                         </div>
                         <div class="input-container">
-                            <label for="inputcopies_owner">Copies owner</label>
+                            <label for="inputcopies_owner">Số bản</label>
                             <input type="number"
                                 class="form-control"
                                 name="copies_owner"
-                                placeholder="Copies owner"
+                                placeholder="Số bản"
                                 value={this.state.copies_owner}
                                 onChange={(event) => { this.handleOnChangeInput(event, "copies_owner") }}
                             />
@@ -146,7 +146,7 @@ class ModalAddBook extends Component {
                     </div>
                     <div class="form-row">
                         <div class="input-container">
-                            <label for="inputImage">Image</label>
+                            <label for="inputImage">Ảnh bìa</label>
                             <input type="file"
                                 class="form-control"
                                 name="image"
@@ -154,7 +154,7 @@ class ModalAddBook extends Component {
                             />
                         </div>
                         <div class="input-container">
-                            <label for="inputCategory">Category</label>
+                            <label for="inputCategory">Thể loại</label>
                             {/* <input type="number"
                                 class="form-control"
                                 name="category"
@@ -170,11 +170,11 @@ class ModalAddBook extends Component {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputdescription">Description</label>
+                        <label for="inputdescription">Mô tả</label>
                         <textarea type="text"
                             class="form-control"
                             name="description"
-                            placeholder="Description"
+                            placeholder="Mô tả"
                             value={this.state.description}
                             onChange={(event) => { this.handleOnChangeInput(event, "description") }}
                         />
@@ -184,12 +184,12 @@ class ModalAddBook extends Component {
                     <Button className="px-3"
                         color="primary"
                         onClick={() => { this.handleAddNewBook() }}>
-                        Add
+                        Thêm
                     </Button>{' '}
                     <Button className="px-3"
                         color="secondary"
                         onClick={() => { this.toggle() }}>
-                        Cancel
+                        Hủy
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -198,15 +198,4 @@ class ModalAddBook extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(ModalUser);
 export default ModalAddBook;

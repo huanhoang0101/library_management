@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import '../scss/StaffManage.scss';
 import { getAllStaffService, createNewStaffService, deleteStaffService, editStaffService } from '../services/StaffService';
 import ModalAddNewStaff from '../modals/AddNewStaffModal';
@@ -123,27 +122,27 @@ class StaffManage extends Component {
                     />
                 }
 
-                <div className="text-center fs-1 fw-bold title">Manage staff</div>
+                <div className="text-center fs-1 fw-bold title">Quản lý nhân viên</div>
                 <div className='mx-1'>
                     <button className='btn btn-primary mx-5 px-3 btn-add-new-staff'
                         onClick={() => this.handleAddNewStaff()}
-                    ><FaPlus className='font-awesome-plus' /> Add new staff</button>
+                    ><FaPlus className='font-awesome-plus' /> Thêm nhân viên mới</button>
                 </div>
                 <div className='staff-table mt-3 mx-5'>
                     <table id="customers">
                         <tr>
                             <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                            <th>Actions</th>
+                            <th>Họ</th>
+                            <th>Tên</th>
+                            <th>Sđt</th>
+                            <th>Hoạt động</th>
                         </tr>
                         {arrStaff && arrStaff.filter(staff => staff.role_id == 2).map((item, index) => {
                             return (
                                 <tr>
                                     <td>{item.email}</td>
-                                    <td>{item.firstName}</td>
                                     <td>{item.lastName}</td>
+                                    <td>{item.firstName}</td>
                                     <td>{item.phone}</td>
                                     <td>
                                         <button className='btn-edit'
@@ -166,15 +165,4 @@ class StaffManage extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(StaffManage);
 export default StaffManage;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import '../scss/UserManage.scss';
 import { getAllBooksService, createNewBookService, deleteBookService, editBookService } from '../services/BookService';
 import ModalAddNewBook from '../modals/AddNewBookModal';
@@ -115,29 +114,29 @@ class BookManage extends Component {
                     this.state.isOpenModalEditBook &&
                     <ModalEditBook
                         isOpen={this.state.isOpenModalEditBook}
-                        toggeleditBook={this.toggelEditBook}
+                        toggelEditBook={this.toggelEditBook}
                         editBook={this.editBook}
                         currentBook={this.state.editBook}
                     />
                 }
 
-                <div className="text-center fs-1 fw-bold title">Manage Books</div>
+                <div className="text-center fs-1 fw-bold title">Quản lý sách</div>
                 <div className='mx-1'>
                     <button className='btn btn-primary mx-5 px-3 btn-add-new-user'
                         onClick={() => this.handleAddNewBook()}
-                    ><FaPlus className='font-awesome-plus' /> Add new book</button>
+                    ><FaPlus className='font-awesome-plus' /> Thêm sách mới</button>
                 </div>
                 <div className='users-table mt-3 mx-5'>
                     <table id="customers">
                         <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Author</th>
-                            <th>Image</th>
-                            <th>Publication date</th>
-                            <th>Copies owner</th>
-                            <th>Action</th>
+                            <th>Tiêu đề</th>
+                            <th>Mô tả</th>
+                            <th>Thể loại</th>
+                            <th>Tác giả</th>
+                            <th>Ảnh bìa</th>
+                            <th>Ngày xuất bản</th>
+                            <th>Số bản</th>
+                            <th>Hoạt động</th>
                         </tr>
                         {arrBooks && arrBooks.map((item, index) => {
                             return (
@@ -146,7 +145,7 @@ class BookManage extends Component {
                                     <td>{item.description}</td>
                                     <td>{item.category_id}</td>
                                     <td>{item.author}</td>
-                                    <td>{item.image}</td>
+                                    <td><img src={item.image} /></td>
                                     <td>{item.publication_date}</td>
                                     <td>{item.copies_owner}</td>
                                     <td>
@@ -170,15 +169,4 @@ class BookManage extends Component {
 
 }
 
-const mapStateToProps = state => {
-    return {
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-    };
-};
-
-//export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
 export default BookManage;

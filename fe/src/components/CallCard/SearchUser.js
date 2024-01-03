@@ -41,8 +41,8 @@ class SearchUser extends Component {
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Họ</th>
+                            <th>Tên</th>
                             <th>Action</th>
                         </tr>
                         {arrUsers && arrUsers.filter((item) => {
@@ -54,8 +54,8 @@ class SearchUser extends Component {
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.email}</td>
-                                    <td>{item.firstName}</td>
                                     <td>{item.lastName}</td>
+                                    <td>{item.firstName}</td>
                                     <td>
                                         <Link to={`/dashboard/loan/${item.id}`}>
                                             <button>Tạo phiếu mượn</button>
