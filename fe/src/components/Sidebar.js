@@ -32,7 +32,7 @@ const Sidebar = () => {
                 <hr /> */}
                 <li>
                     <FaUserPlus className='font-awesome' />
-                    <Link to="/dashboard/user" className="side-bar-link">Quản lý người mượn</Link>
+                    <Link to="/dashboard/user" className="side-bar-link">Quản lý học sinh</Link>
                 </li>
                 <hr />
                 <li>
